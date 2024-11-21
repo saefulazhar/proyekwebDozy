@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #cfe6f5;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+.logo-container {
+  background-color: #e6f1fa;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  overflow: hidden; 
+}
+
+.logo {
+  width: 260px; /*Sesuaikan ukuran gambar logo*/
+  height: auto;
+}
+
+.title {
+  font-size: 24px;
+  color: #3077a1;
+  margin-top: 10px;
+}
+
+.welcome-text {
+  font-size: 20px;
+  color: #2d4373;
+  font-weight: bold;
+}
