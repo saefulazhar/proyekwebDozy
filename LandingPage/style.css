@@ -64,10 +64,10 @@ body {
   background-color: #78b3ce;
   border-radius: 5px;
   padding: 10px;
-  border-inline: none;
+  border: none;
   color: #fff;
   font-family: sans-serif;
 }
 .top-links button:hover {
-  background-color: #7e96c9;
+  background-color: #6fbdf1;
 }
