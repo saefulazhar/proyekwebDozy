@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
             // Login berhasil
             $_SESSION['username'] = $row['username'];
             $_SESSION['email'] = $row['email'];
-            header("Location: dashboard.php"); // Arahkan ke halaman dashboard
+            header("Location: ../Dashboard/home.php"); // Arahkan ke halaman dashboard
             exit;
         } else {
             // Password salah
