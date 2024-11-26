@@ -1,6 +1,10 @@
 <?php
+$host = 'localhost'; // Ganti dengan host Anda
+$dbname = 'dozy_db'; // Nama database Anda
+$username = 'root'; // Username database Anda
+$password = ''; // Password database Anda (kosong jika localhost)
 // Membuat koneksi ke database
-$conn = new mysqli("localhost", "root", "", "dozy_db");
+$conn = new mysqli($host, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);

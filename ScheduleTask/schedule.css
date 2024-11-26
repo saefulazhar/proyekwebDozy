@@ -158,6 +158,12 @@ table th {
 .bar.low {
   background-color: #4caf50;
 }
+#calendar {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
 
 /* Add Task Button */
 .add-task {
@@ -167,11 +173,47 @@ table th {
 }
 
 .add-task button {
-  background-color: #2b4a7f;
+  background-color: #325592;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.add-task button:hover {
+  background-color: #487cd4;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  border-radius: 8px;
+}
+
+.close-btn {
+  color: red;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: darkred;
 }
