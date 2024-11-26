@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +13,7 @@
             <h1>dozy.</h1>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Schedule & Task</a></li>
+                <li><a href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
                 <li><a href="#">Progress</a></li>
                 <li><a href="#">Setting</a></li>
                 <li><a href="#">Log out</a></li>
@@ -24,7 +22,7 @@
         <!-- Content -->
         <div class="content">
             <div class="header">
-                <h2>Hello, Soffa! Welcome back to dozy.</h2>
+            <h2>Hello, <span id="username">Guest</span>! Welcome to Dozy.</h2>
                 <img src="https://via.placeholder.com/40" alt="Profile Picture" style="border-radius: 50%;">
             </div>
             <div class="stats">
@@ -64,5 +62,7 @@
             </div>
         </div>
     </div>
+    <script src="../JavaScript/dashboard.js"></script>
+
 </body>
 </html>

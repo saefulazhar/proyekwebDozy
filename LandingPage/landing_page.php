@@ -14,8 +14,8 @@
       </div>
       <p class="welcome-text">welcome to dozy!</p>
       <div class="top-links">
-        <a href="register.html"><button>Register</button></a>
-        <a href="proyekwebDozy/Login/login.html"><button>Login</button></a>
+        <a href="../Register/registrasi.php"><button>Register</button></a>
+        <a href="../Login/login.php"><button>Login</button></a>
       </div>
     </div>
   </body>
