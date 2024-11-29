@@ -6,8 +6,11 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Query untuk mencari email
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
+    // Menggunakan prepared statement untuk menghindari SQL injection
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if (mysqli_num_rows($result) === 1) {
         // Fetch data pengguna
@@ -15,9 +18,11 @@ if (isset($_POST['login'])) {
 
         // Verifikasi password
         if (password_verify($password, $row['password'])) {
-            // Login berhasil
+            // Login berhasil, menyimpan data sesi
+            $_SESSION['user_id'] = $row['user_id']; // Menyimpan user_id dalam sesi
             $_SESSION['username'] = $row['username'];
             $_SESSION['email'] = $row['email'];
+
             header("Location: ../Dashboard/home.php"); // Arahkan ke halaman dashboard
             exit;
         } else {
