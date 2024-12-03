@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="dash.css">
+    <link rel="stylesheet" href="../Sidebar/sidebar.css">
+    <script src="../JavaScript/logout.js"></script>
 </head>
 <body>
     <div class="container">
@@ -12,11 +14,11 @@
         <div class="sidebar">
             <h1>dozy.</h1>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
-                <li><a href="#">Progress</a></li>
-                <li><a href="#">Setting</a></li>
-                <li><a href="#">Log out</a></li>
+                <li><a class="menu" href="../Dashboard/home.php">Home</a></li>
+                <li><a class="menu" href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
+                <li><a class="menu" href="../Progress/progres.php">Progress</a></li>
+                <li><a class="menu" href="../Setting/seting.php">Setting</a></li>
+                <li><a class="menu" href="#" onclick="confirmLogout()">Log out</a></li>
             </ul>
         </div>
         <!-- Content -->
