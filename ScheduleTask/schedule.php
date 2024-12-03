@@ -13,6 +13,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
     <link rel="stylesheet" href="schedule.css">
     <link rel="stylesheet" href="../Sidebar/sidebar.css">
     <script src="../JavaScript/logout.js"></script>
+    <script src="../JavaScript/addtask.js"></script>
     
    <!-- FullCalendar CSS -->
    <link
@@ -26,22 +27,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
     <!-- Optional: FullCalendar plugins (eg. DayGrid, interaction) -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/locales-all.min.js"></script>
 
-    <style>
-      
-
-      .calendar-container {
-        max-width: 900px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-      }
-
-      #calendar {
-        margin-top: 20px;
-      }
-    </style>
    
 </head>
 <body>
@@ -71,17 +56,20 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
             </div>
 
             <!-- Notifikasi: Jika berhasil atau gagal menambahkan task -->
-            <?php if ($success): ?>
-                <div class="notification success">
-                    Task berhasil ditambahkan!
-                </div>
-            <?php endif; ?>
+<?php if ($success): ?>
+    <div class="notification success">
+        Task berhasil ditambahkan!
+        <button class="close-notification" onclick="closeNotification(this)">OK</button>
+    </div>
+<?php endif; ?>
 
-            <?php if ($error): ?>
-                <div class="notification error">
-                    Gagal menambahkan task. Silakan coba lagi.
-                </div>
-            <?php endif; ?>
+<?php if ($error): ?>
+    <div class="notification error">
+        Gagal menambahkan task. Silakan coba lagi.
+        <button class="close-notification" onclick="closeNotification(this)">OK</button>
+    </div>
+<?php endif; ?>
+
 
             <!-- Stats Section -->
             <div class="stats">
@@ -102,6 +90,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
                         <label for="task-title">Task Title:</label>
                         <input type="text" id="task-title" name="title" required><br>
 
+                        <label for="description-task">Description:</label>
+                        <input type="text" id="description-task" name="description" required><br>
+
                         <label for="due-date">Due Date:</label>
                         <input type="date" id="due-date" name="due_date" required><br>
 
@@ -114,8 +105,8 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
 
                         <label for="status">Status:</label>
                         <select id="status" name="status" required>
-                            <option value="not-started">Not Started</option>
-                            <option value="in-progress">In Progress</option>
+                            <option value="not_started">Not Started</option>
+                            <option value="in_progress">In Progress</option>
                             <option value="completed">Completed</option>
                         </select><br>
 
@@ -156,24 +147,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
           initialView: "dayGridMonth", // Set default view to monthly
           locale: "en", // Set locale to English
           events: [
-            {
-              title: "Sample Event 1",
-              start: "2024-12-05",
-              description: "This is a sample event.",
-              color: "red",
-            },
-            {
-              title: "Sample Event 2",
-              start: "2024-12-12",
-              description: "This is another sample event.",
-              color: "green",
-            },
-            {
-              title: "Sample Event 3",
-              start: "2024-12-20",
-              description: "Yet another event.",
-              color: "blue",
-            },
+            
           ],
           eventClick: function (info) {
             alert(
