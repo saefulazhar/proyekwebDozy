@@ -12,6 +12,7 @@ $title = isset($_POST['title']) ? $_POST['title'] : '';
 $description = isset($_POST['description']) ? $_POST['description'] : '';
 $due_date = isset($_POST['due_date']) ? $_POST['due_date'] : '';
 $priority = isset($_POST['priority']) ? $_POST['priority'] : '';
+$status = isset($_POST['status']) ? $_POST['status'] : '';
 
 // Ambil user_id dari sesi
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -25,9 +26,9 @@ if ($user_id === null) {
 if (!empty($title) && !empty($due_date) && $user_id !== null) {
     // Query untuk memasukkan tugas baru ke database
     $query = "INSERT INTO task (title, description, due_date, priority, status, progress, user_id) 
-              VALUES (?, ?, ?, ?, 'pending', 0, ?)";
+              VALUES (?, ?, ?, ?, ?, 0, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('ssssi', $title, $description, $due_date, $priority, $user_id);
+    $stmt->bind_param('sssssi', $title, $description, $due_date, $priority, $status, $user_id);
     
     if ($stmt->execute()) {
         // Redirect setelah berhasil
