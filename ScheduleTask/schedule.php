@@ -1,3 +1,9 @@
+<?php
+// Cek apakah ada parameter success atau error di URL
+$success = isset($_GET['success']) ? $_GET['success'] : null;
+$error = isset($_GET['error']) ? $_GET['error'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +11,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule & Task</title>
     <link rel="stylesheet" href="schedule.css">
-    <script src="../JavaScript/calendar.js" defer></script>
+    <link rel="stylesheet" href="../Sidebar/sidebar.css">
+    <script src="../JavaScript/logout.js"></script>
+    
+   <!-- FullCalendar CSS -->
+   <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+    <!-- Optional: FullCalendar plugins (eg. DayGrid, interaction) -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/locales-all.min.js"></script>
+
+    <style>
+      
+
+      .calendar-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      #calendar {
+        margin-top: 20px;
+      }
+    </style>
+   
 </head>
 <body>
     <div class="container">
@@ -13,11 +50,11 @@
         <div class="sidebar">
             <h1>dozy.</h1>
             <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
-                <li><a href="#">Progress</a></li>
-                <li><a href="#">Setting</a></li>
-                <li><a href="#">Log out</a></li>
+                <li><a class="menu" href="../Dashboard/home.php">Home</a></li>
+                <li><a class="menu" href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
+                <li><a class="menu" href="../Progress/progres.php">Progress</a></li>
+                <li><a class="menu" href="../Setting/seting.php">Setting</a></li>
+                <li><a class="menu" href="#" onclick="confirmLogout()">Log out</a></li>
             </ul>
         </div>
 
@@ -33,6 +70,19 @@
                 </div>
             </div>
 
+            <!-- Notifikasi: Jika berhasil atau gagal menambahkan task -->
+            <?php if ($success): ?>
+                <div class="notification success">
+                    Task berhasil ditambahkan!
+                </div>
+            <?php endif; ?>
+
+            <?php if ($error): ?>
+                <div class="notification error">
+                    Gagal menambahkan task. Silakan coba lagi.
+                </div>
+            <?php endif; ?>
+
             <!-- Stats Section -->
             <div class="stats">
                 <span class="priority high">High</span>
@@ -43,11 +93,6 @@
             <!-- Calendar Section -->
             <div class="calendar">
                 <div class="view-header">
-                    <div class="view-buttons">
-                        <button class="view-btn">Monthly</button>
-                        <button class="view-btn">Week</button>
-                        <button class="view-btn">Day</button>
-                    </div>
                     <button class="add-btn" onclick="toggleAddTaskForm()">+ Add</button>
                 </div>
 
@@ -79,23 +124,8 @@
                     </form>
                 </div>
 
-                <!-- Calendar Table -->
-                <table id="calendar-table">
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Kalender akan diisi dengan script JavaScript -->
-                    </tbody>
-                </table>
+                <!-- FullCalendar Container -->
+                <div id="calendar"></div>
             </div>
         </div>
     </div>
@@ -109,45 +139,71 @@
 
         // Ambil data tugas dari get_task.php
         function loadTasks(month, year) {
-            fetch(`../ScheduleTask/get_task.php?month=${month}&year=${year}`)
+            fetch(`get_task.php?month=${month}&year=${year}`)
                 .then(response => response.json())
                 .then(tasks => {
-                    populateCalendar(tasks);
+                    initializeCalendar(tasks);
                 })
                 .catch(error => {
                     console.error('Error fetching tasks:', error);
                 });
         }
 
-        // Populate calendar with tasks
-        function populateCalendar(tasks) {
-            const calendarTable = document.getElementById('calendar-table').getElementsByTagName('tbody')[0];
-            const rows = calendarTable.rows;
-            const tasksByDate = {};
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
 
-            // Organize tasks by date
-            tasks.forEach(task => {
-                const date = new Date(task.due_date);
-                const day = date.getDate();
-                if (!tasksByDate[day]) tasksByDate[day] = [];
-                tasksByDate[day].push(task);
-            });
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth", // Set default view to monthly
+          locale: "en", // Set locale to English
+          events: [
+            {
+              title: "Sample Event 1",
+              start: "2024-12-05",
+              description: "This is a sample event.",
+              color: "red",
+            },
+            {
+              title: "Sample Event 2",
+              start: "2024-12-12",
+              description: "This is another sample event.",
+              color: "green",
+            },
+            {
+              title: "Sample Event 3",
+              start: "2024-12-20",
+              description: "Yet another event.",
+              color: "blue",
+            },
+          ],
+          eventClick: function (info) {
+            alert(
+              "Event: " +
+                info.event.title +
+                "\nDescription: " +
+                info.event.extendedProps.description
+            );
+          },
+          headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,dayGridWeek,dayGridDay",
+          },
+        });
 
-            // Loop through all calendar days and assign task classes
-            for (let i = 0; i < rows.length; i++) {
-                for (let j = 0; j < rows.cells.length; j++) {
-                    const cell = rows[i].cells[j];
-                    const day = parseInt(cell.textContent);
-                    if (tasksByDate[day]) {
-                        tasksByDate[day].forEach(task => {
-                            const taskDiv = document.createElement('div');
-                            taskDiv.classList.add('task');
-                            taskDiv.classList.add(task.priority);
-                            taskDiv.textContent = task.title;
-                            cell.appendChild(taskDiv);
-                        });
-                    }
-                }
+        calendar.render();
+      });
+
+        // Set task color based on priority
+        function getTaskColor(priority) {
+            switch (priority) {
+                case 'high':
+                    return 'red';
+                case 'medium':
+                    return 'orange';
+                case 'low':
+                    return 'green';
+                default:
+                    return 'blue';
             }
         }
 
@@ -157,6 +213,15 @@
             const year = new Date().getFullYear();  // Tahun saat ini
             loadTasks(month, year);
         }
+        const menuItems = document.querySelectorAll('.sidebar .menu');
+
+menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        menuItems.forEach(i => i.classList.remove('active')); // Menghapus kelas 'active' dari semua menu
+        item.classList.add('active'); // Menambahkan kelas 'active' pada menu yang dipilih
+    });
+});
+
     </script>
 </body>
 </html>
