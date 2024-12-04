@@ -20,5 +20,15 @@
                 <li><a class="menu" href="#" onclick="confirmLogout()">Log out</a></li>
             </ul>
         </div>
+        <!-- content -->
+        <div class="content">
+            <ul>
+                <li><a href="editprofile.php">Edit Profile</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Notification Setting</a></li>
+                <li><a href="#">Delete Acount</a></li>
+            </ul>
+        </div>
+</div>
 </body>
 </html>

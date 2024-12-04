@@ -128,65 +128,68 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
             form.style.display = form.style.display === 'none' ? 'block' : 'none';
         }
 
-        // Ambil data tugas dari get_task.php
-        function loadTasks(month, year) {
-            fetch(`get_task.php?month=${month}&year=${year}`)
-                .then(response => response.json())
-                .then(tasks => {
-                    initializeCalendar(tasks);
-                })
-                .catch(error => {
-                    console.error('Error fetching tasks:', error);
-                });
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+    var calendarEl = document.getElementById("calendar");
 
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: "dayGridMonth", // Set default view to monthly
-          locale: "en", // Set locale to English
-          events: [
-            
-          ],
-          eventClick: function (info) {
-            alert(
-              "Event: " +
-                info.event.title +
-                "\nDescription: " +
-                info.event.extendedProps.description
-            );
-          },
-          headerToolbar: {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: "dayGridMonth",
+        locale: "en",
+        headerToolbar: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,dayGridWeek,dayGridDay",
-          },
+            right: "dayGridMonth,dayGridWeek,dayGridDay"
+        },
+        events: [] // Kosongkan dulu, akan diisi oleh loadTasks()
+    });
+
+    // Mendapatkan bulan dan tahun dari tanggal saat ini
+    const currentMonth = new Date().getMonth() + 1; // Bulan saat ini (1-12)
+    const currentYear = new Date().getFullYear();  // Tahun saat ini
+
+    console.log("Tasks fetched for month:", currentMonth, "year:", currentYear);
+
+    // Render kalender terlebih dahulu
+    calendar.render();
+
+    // Memuat tugas setelah kalender dirender
+    loadTasks(currentMonth, currentYear, calendar); // Ganti month dan year di sini
+});
+
+// Fungsi loadTasks yang diperbarui untuk FullCalendar v5
+function loadTasks(month, year, calendar) {
+    fetch(`get_tasks.php?month=${month}&year=${year}`)
+        .then(response => response.json())
+        .then(tasks => {
+            const events = tasks.map(task => ({
+                title: task.title,
+                start: task.due_date, // Pastikan format tanggal sesuai dengan format yang diminta oleh FullCalendar
+                description: task.description || '', // Pastikan field ini ada jika diperlukan
+                color: getTaskColor(task.priority) // Gunakan warna berdasarkan prioritas
+            }));
+            calendar.addEventSource(events); // Menambahkan event ke kalender
+        })
+        .catch(error => {
+            console.error('Error fetching tasks:', error);
         });
+}
 
-        calendar.render();
-      });
+function getTaskColor(priority) {
+    switch (priority) {
+        case 'high':
+            return 'red';
+        case 'medium':
+            return 'orange';
+        case 'low':
+            return 'green';
+        default:
+            return 'blue';
+    }
+}
 
-        // Set task color based on priority
-        function getTaskColor(priority) {
-            switch (priority) {
-                case 'high':
-                    return 'red';
-                case 'medium':
-                    return 'orange';
-                case 'low':
-                    return 'green';
-                default:
-                    return 'blue';
-            }
-        }
 
-        // Call loadTasks when the page loads
-        window.onload = function () {
-            const month = new Date().getMonth() + 1; // Bulan saat ini
-            const year = new Date().getFullYear();  // Tahun saat ini
-            loadTasks(month, year);
-        }
+
+
+
         const menuItems = document.querySelectorAll('.sidebar .menu');
 
 menuItems.forEach(item => {
