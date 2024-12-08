@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     // Query untuk memperbarui data pengguna berdasarkan ID
     $sql = "UPDATE users SET username = '$new_username', email = '$new_email' WHERE user_id = '$user_id'";
     
-    // Mengeksekusi query
+    // Mengeksekusi querys
     if ($conn->query($sql) === TRUE) {
         echo "Data berhasil diperbarui.";
     } else {

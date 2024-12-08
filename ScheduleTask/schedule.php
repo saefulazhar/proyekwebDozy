@@ -94,7 +94,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
                         <input type="text" id="description-task" name="description" required><br>
 
                         <label for="due-date">Due Date:</label>
-                        <input type="date" id="due-date" name="due_date" required><br>
+                        <input type="datetime-local" id="due-date" name="due_date" required><br>
 
                         <label for="priority">Priority:</label>
                         <select id="priority" name="priority" required>
@@ -178,7 +178,7 @@ function getTaskColor(priority) {
         case 'high':
             return 'red';
         case 'medium':
-            return 'orange';
+            return 'yellow';
         case 'low':
             return 'green';
         default:
