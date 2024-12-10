@@ -1,0 +1,78 @@
+/* Content Styles */
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  color: #3366cc;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.stats .box {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+}
+
+.box.high {
+  background-color: #ff6b6b;
+}
+
+.box.med {
+  background-color: #ffa502;
+}
+
+.box.low {
+  background-color: #1dd1a1;
+}
+
+.box.not-yet {
+  background-color: #576574;
+}
+
+.box.done {
+  background-color: #48dbfb;
+}
+
+/* Schedule and Calendar */
+.schedule,
+.calendar {
+  margin-top: 30px;
+}
+
+.calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar th,
+.calendar td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.calendar th {
+  background-color: #f1f1f1;
+}
+
+/* Footer Notes */
+.footer-notes {
+  margin-top: 20px;
+  font-size: 14px;
+}
