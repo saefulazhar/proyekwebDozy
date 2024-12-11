@@ -35,7 +35,7 @@ if (isset($_POST['register'])) {
       /* Body Styles */
       body {
         font-family: 'Arial', sans-serif;
-        background-color: #d9eafc; /* Latar belakang biru muda */
+        background-color: #cfe6f5; /* Latar belakang biru muda */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,32 +43,56 @@ if (isset($_POST['register'])) {
       }
 
       .container {
-        text-align: center;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+        padding: 20px;
+        max-width: 800px;
         width: 100%;
-        max-width: 400px;
       }
 
-      /* Header */
-      .title {
+      /* Logo Styles */
+      .logo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .logo img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover; /* Memastikan gambar memenuhi lingkaran tanpa merusak proporsi */
+        border-radius: 50%; /* Agar gambar berbentuk lingkaran */
+      }
+
+      /* Form Container */
+      .form-container {
+        flex: 2;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .form-container .title {
         font-size: 28px;
         font-weight: bold;
         color: #2a2a72; /* Warna biru tua */
         margin-bottom: 20px;
       }
 
-      /* Form Container */
-      .form-container {
-        background-color: #8aa6d8; /* Warna biru medium */
-        border-radius: 15px;
-        padding: 30px 20px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
       }
 
       /* Input Field Styles */
       .form-container input {
         width: 100%;
         padding: 10px 15px;
-        margin-bottom: 15px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
@@ -82,11 +106,10 @@ if (isset($_POST['register'])) {
 
       /* Button Styles */
       .form-container button {
-        width: 100%;
         padding: 10px 15px;
         font-size: 16px;
-        color: white;
-        background-color: #2a2a72; /* Warna biru tua */
+        color: black;
+        background-color: #d9eafc; /* Warna biru tua */
         border: none;
         border-radius: 10px;
         cursor: pointer;
@@ -100,21 +123,19 @@ if (isset($_POST['register'])) {
   </head>
   <body>
     <div class="container">
-      <!-- Header -->
-      <h1 class="title">Register here!</h1>
+      <!-- Logo -->
+      <div class="logo">
+        <img src="../LandingPage/logo dozy.jpeg" alt="logo" />
+      </div>
 
       <!-- Form -->
       <div class="form-container">
+        <h1 class="title">Register here!</h1>
         <form action="registrasi.php" method="POST">
           <input type="text" name="username" placeholder="Enter Username" required />
           <input type="email" name="email" placeholder="Enter Email" required />
           <input type="password" name="password" placeholder="Enter Password" required />
-          <input
-            type="password"
-            name="password2"
-            placeholder="Confirm Password"
-            required
-          />
+          <input type="password" name="password2" placeholder="Confirm Password" required />
           <button type="submit" name="register">Register</button>
         </form>
       </div>

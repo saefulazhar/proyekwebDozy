@@ -45,24 +45,23 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="login-container">
-      <div class="login-box">
-        <h1>Login to your Dozy account</h1>
-        <form action="login.php" method="POST">
-          <input type="email" name="email" placeholder="Enter your email" required />
-          <input type="password" name="password" placeholder="Enter your password" required />
-          <button type="submit" name="login" class="login-button">Login</button>
-        </form>
-        <button class="login-button google">
-          <img src="google.png" alt="Google Icon" />
-          Continue with Google
-        </button>
-        <?php if (isset($error)) : ?>
-          <p class="error-message"><?php echo $error; ?></p>
-        <?php endif; ?>
-      </div>
-      <div class="illustration">
-        <img src="login.png" alt="Illustration" />
+    <div class="container">
+      <div class="login-container">
+        <div class="login-box">
+          <h1>Login to your Dozy account</h1>
+          <form action="login.php" method="POST">
+            <input type="email" name="email" placeholder="Enter your email" required /><br>
+            <input type="password" name="password" placeholder="Enter your password" required />
+            <button type="submit" name="login" class="login-button">Login</button>
+          </form>
+          
+          <?php if (isset($error)) : ?>
+            <p class="error-message"><?php echo $error; ?></p>
+          <?php endif; ?>
+        </div>
+        <div class="illustration">
+          <img src="../LandingPage/logo dozy.jpeg" alt="Illustration" />
+        </div>
       </div>
     </div>
   </body>

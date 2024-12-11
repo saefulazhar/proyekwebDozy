@@ -44,6 +44,9 @@
 .box.not-yet {
   background-color: #576574;
 }
+.box.in-progress {
+  background-color: cadetblue;
+}
 
 .box.done {
   background-color: #48dbfb;
