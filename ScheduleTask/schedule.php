@@ -156,17 +156,21 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
 });
 
 // Fungsi loadTasks yang diperbarui untuk FullCalendar v5
+// Fungsi untuk menentukan warna berdasarkan prioritas
+// Fungsi loadTasks yang diperbarui untuk FullCalendar v5
 function loadTasks(month, year, calendar) {
     fetch(`get_tasks.php?month=${month}&year=${year}`)
         .then(response => response.json())
         .then(tasks => {
             const events = tasks.map(task => ({
                 title: task.title,
-                start: task.due_date, // Pastikan format tanggal sesuai dengan format yang diminta oleh FullCalendar
-                description: task.description || '', // Pastikan field ini ada jika diperlukan
-                color: getTaskColor(task.priority) // Gunakan warna berdasarkan prioritas
+                start: task.due_date, // Format tanggal sesuai dengan FullCalendar
+                description: task.description || '', // Menambahkan deskripsi jika ada
+                backgroundColor: getTaskColor(task.priority), // Menentukan warna background
+                borderColor: getTaskColor(task.priority), // Menentukan warna border
+                textColor: 'white'  // Warna teks putih agar kontras dengan latar belakang
             }));
-            calendar.addEventSource(events); // Menambahkan event ke kalender
+            calendar.addEventSource(events); // Menambahkan tugas ke kalender
         })
         .catch(error => {
             console.error('Error fetching tasks:', error);
@@ -176,19 +180,15 @@ function loadTasks(month, year, calendar) {
 function getTaskColor(priority) {
     switch (priority) {
         case 'high':
-            return 'red';
+            return '#ff0000';   // Merah untuk high
         case 'medium':
-            return 'yellow';
+            return '#ffcc00';   // Kuning untuk medium
         case 'low':
-            return 'green';
+            return '#4caf50';   // Hijau untuk low
         default:
-            return 'blue';
+            return '#0000ff';   // Biru sebagai warna default jika tidak ada prioritas
     }
 }
-
-
-
-
 
         const menuItems = document.querySelectorAll('.sidebar .menu');
 
