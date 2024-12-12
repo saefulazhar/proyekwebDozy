@@ -65,7 +65,19 @@
   text-transform: uppercase;
 }
 
-/* Warna untuk tugas dengan prioritas */
+.priority.high {
+  background-color: #e74c3c;
+}
+
+.priority.med {
+  background-color: #f1c40f;
+}
+
+.priority.low {
+  background-color: #2ecc71;
+}
+
+/* Warna untuk tugas dengan prioritas
 .fc-event.red {
   background-color: red !important;
 }
@@ -76,7 +88,7 @@
 
 .fc-event.green {
   background-color: green !important;
-}
+} */
 
 /* Calendar Section */
 /* Calendar Section */
@@ -98,24 +110,22 @@
 }
 
 .view-header {
+  display: flex;
+  margin-bottom: 10px;
   position: sticky;
-  top: 0; /* Menempel di atas saat di-scroll */
-  background-color: #fff; /* Menambahkan latar belakang agar terlihat jelas */
-  z-index: 10; /* Pastikan header tetap di atas konten lainnya */
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan untuk efek visual */
+  top: 0%;
+  z-index: 3;
 }
 
 .add-btn {
-  position: sticky;
-  top: 0;
-  background-color: #4a90e2; /* Warna latar belakang */
+  background-color: #4a90e2;
   color: white;
-  padding: 10px;
+  padding: 8px 16px;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  z-index: 10; /* Pastikan tombol tetap berada di atas */
+  margin-left: auto; /* Push button to the right */
+  z-index: 4;
 }
 
 .add-btn:hover {

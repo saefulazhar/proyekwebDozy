@@ -84,7 +84,7 @@
   <body>
     <div class="container">
       <div class="circle">
-        <img src="logo dozy.jpeg" alt="Dozy Logo" />
+        <img src="LandingPage/logo dozy.jpeg" alt="Dozy Logo" />
       </div>
 
       <!-- Teks Selamat Datang -->
@@ -93,8 +93,8 @@
 
       <!-- Tombol Register dan Login -->
       <div class="buttons">
-        <a href="../Register/registrasi.php"><button>Register</button></a>
-        <a href="../Login/login.php"><button>Login</button></a>
+        <a href="Register/registrasi.php"><button>Register</button></a>
+        <a href="Login/login.php"><button>Login</button></a>
       </div>
     </div>
   </body>

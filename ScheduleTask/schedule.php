@@ -180,11 +180,11 @@ function loadTasks(month, year, calendar) {
 function getTaskColor(priority) {
     switch (priority) {
         case 'high':
-            return '#ff0000';   // Merah untuk high
+            return '#e74c3c';   // Merah untuk high
         case 'medium':
-            return '#ffcc00';   // Kuning untuk medium
+            return '#f1c40f';   // Kuning untuk medium
         case 'low':
-            return '#4caf50';   // Hijau untuk low
+            return '#2ecc71';   // Hijau untuk low
         default:
             return '#0000ff';   // Biru sebagai warna default jika tidak ada prioritas
     }
