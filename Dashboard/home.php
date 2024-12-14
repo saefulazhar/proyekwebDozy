@@ -211,7 +211,7 @@ $tasks = $conn->query("SELECT task_id, title, description, due_date, priority FR
             <ul>
                 <li><a class="menu" href="../Dashboard/home.php">Home</a></li>
                 <li><a class="menu" href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
-                <li><a class="menu" href="../Progress/progres.php">Progress</a></li>
+                
                 <li><a class="menu" href="../Setting/seting.php">Setting</a></li>
                 <li><a class="menu" href="#" onclick="confirmLogout()">Log out</a></li>
             </ul>

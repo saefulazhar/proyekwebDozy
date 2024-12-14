@@ -37,7 +37,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
             <ul>
                 <li><a class="menu" href="../Dashboard/home.php">Home</a></li>
                 <li><a class="menu" href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
-                <li><a class="menu" href="../Progress/progres.php">Progress</a></li>
+                
                 <li><a class="menu" href="../Setting/seting.php">Setting</a></li>
                 <li><a class="menu" href="#" onclick="confirmLogout()">Log out</a></li>
             </ul>
