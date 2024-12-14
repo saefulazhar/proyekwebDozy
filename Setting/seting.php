@@ -69,7 +69,7 @@
         <ul>
             <li><a class="menu" href="../Dashboard/home.php">Home</a></li>
             <li><a class="menu" href="../ScheduleTask/schedule.php">Schedule & Task</a></li>
-            <li><a class="menu" href="../Progress/progres.php">Progress</a></li>
+            
             <li><a class="menu" href="../Setting/seting.php">Setting</a></li>
             <li><a class="menu" href="#" onclick="confirmLogout()">Log out</a></li>
         </ul>
@@ -80,8 +80,7 @@
         <ul>
             <li><a href="editprofile.php">Edit Profile</a></li>
             <li><a href="edit_pass.php">Security</a></li>
-            <li><a href="#">Notification Setting</a></li>
-            <li><a href="#">Delete Account</a></li>
+            
         </ul>
     </div>
 </div>
