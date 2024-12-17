@@ -1,18 +1,32 @@
 <?php
+session_start(); // Mulai sesi
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Mengimpor file koneksi database
 require_once '../function/function.php'; // Pastikan path sudah benar
 
+// Cek apakah user sudah login
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['error' => 'User belum login']);
+    exit();
+}
+
+// Ambil user_id dari sesi
+$user_id = $_SESSION['user_id'];
+
 // Memeriksa apakah ada parameter bulan dan tahun
 $month = isset($_GET['month']) ? intval($_GET['month']) : date('m');
 $year = isset($_GET['year']) ? intval($_GET['year']) : date('Y');
 
-// Menjalankan query menggunakan $conn yang sudah terhubung ke database
 try {
-    $stmt = $conn->prepare("SELECT title, due_date FROM task WHERE MONTH(due_date) = ? AND YEAR(due_date) = ?");
-    $stmt->bind_param('ii', $month, $year);
+    // Query dengan filter tambahan berdasarkan user_id
+    $stmt = $conn->prepare("
+        SELECT title, due_date, priority
+        FROM task 
+        WHERE user_id = ? AND MONTH(due_date) = ? AND YEAR(due_date) = ?
+    ");
+    $stmt->bind_param('iii', $user_id, $month, $year);
     $stmt->execute();
     $result = $stmt->get_result();
 
